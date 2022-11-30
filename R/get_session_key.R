@@ -23,7 +23,7 @@ get_session_key <- function(username = getOption('lime_username'),
   #   params = list(admin = unbox("username"), password = unbox("password"))
   # But that's a lot of extra work. So auto_unbox suffices here.
   # More details and debate: https://github.com/hadley/httr/issues/159
-  r <- POST(getOption('lime_api'), content_type_json(),
+  r <- POST(getOption('lime_api'),use_proxy("http://igw-ktzh-gmd-al.abxsec.com", port = 8080), content_type_json(),
             body = jsonlite::toJSON(body.json, auto_unbox = TRUE))
 
   session_key <- as.character(jsonlite::fromJSON(content(r, encoding="utf-8"))$result)
