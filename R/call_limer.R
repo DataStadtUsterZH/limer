@@ -33,7 +33,7 @@ call_limer <- function(method, params = list(), ...) {
                     id = " ",
                     params = params.full)
 
-  r <- httr::POST(getOption('lime_api'), httr::content_type_json(),
+  r <- httr::POST(getOption('lime_api'),use_proxy("http://igw-ktzh-gmd-al.abxsec.com", port = 8080), httr::content_type_json(),
             body = jsonlite::toJSON(body.json, auto_unbox = TRUE), ...)
 
   return(jsonlite::fromJSON(httr::content(r, as='text', encoding="utf-8"))$result)   # incorporated fix by petrbouchal
